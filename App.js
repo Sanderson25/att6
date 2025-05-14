@@ -4,22 +4,20 @@ import { Ionicons } from '@expo/vector-icons';
 import axios from 'axios';
 
 export default function App() {
-  const [messages, setMessages] = useState([]); // Estado para armazenar as mensagens
-
+  const [messages, setMessages] = useState([]); 
   useEffect(() => {
     const fetchMessages = async () => {
       try {
-        // Fazendo a requisição para a API que está rodando em http://localhost:5000/messages
-        const response = await axios.get('http://localhost:5000/messages');
-        console.log('Response:', response.data); // Verifique a resposta no console
-        setMessages(response.data); // Atualizando o estado com os dados da API
+        const response = await axios.get('http://localhost:3000/messages');
+        console.log('Response:', response.data); 
+        setMessages(response.data); 
       } catch (error) {
-        console.error("Erro ao buscar as mensagens: ", error); // Se houver erro, será impresso aqui
+        console.error("Erro ao buscar as mensagens: ", error); 
       }
     };
 
     fetchMessages();
-  }, []); // UseEffect com array vazio para rodar uma vez
+  }, []);
 
   const renderItem = ({ item }) => (
     <View style={styles.messageItem}>
@@ -54,10 +52,10 @@ export default function App() {
 
       {/* Lista de mensagens */}
       <FlatList
-        data={messages} // Passando as mensagens que foram recebidas pela API
-        keyExtractor={(item) => item.id.toString()} // Convertendo o id para string, caso seja número
-        renderItem={renderItem} // Função que renderiza cada item
-        contentContainerStyle={styles.messageList} // Estilos do container
+        data={messages} 
+        keyExtractor={(item) => item.id.toString()} 
+        renderItem={renderItem} 
+        contentContainerStyle={styles.messageList} 
       />
 
       {/* Rodapé */}
